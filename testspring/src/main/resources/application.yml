@@ -1,0 +1,10 @@
+server:
+  port: 8081
+
+persion:
+  lastName: lisi
+  age: 13
+  Date: 2019/07/22
+  List:
+    - lisi
+    - zhaoliu
