@@ -3,6 +3,7 @@ package com.carrot.testspring.bean;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,9 @@ import java.util.List;
 @Builder
 @AllArgsConstructor*/
 public class Persion {
+//    @Value('$zhangsan')
     private  String lastName;
+/*    @Value("#{36/2}")*/
     private  int age;
     private  Date data;
     private  List<Object> list;
