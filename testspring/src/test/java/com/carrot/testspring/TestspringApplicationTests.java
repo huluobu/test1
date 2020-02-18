@@ -3,7 +3,8 @@ package com.carrot.testspring;
 import com.carrot.testspring.bean.Persion;
 import com.carrot.testspring.service.Helloservice;
 import org.apache.catalina.core.ApplicationContext;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+
 //import org.junit.platform.commons.logging.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

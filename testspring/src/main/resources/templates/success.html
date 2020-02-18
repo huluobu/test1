@@ -7,5 +7,15 @@
 <body>
     <h1>成功</h1>
     <p th:text="${hello}">Welcome to our grocery store!</p>
+    <p>Today is: <span th:text="${today}">13 February 2011</span></p>
+    <hr/>
+    <div th:text="${hello}"> </div>
+    <div th:utext="${hello}"> </div>
+    <hr/>
+<h4 th:text="${user}" th:each="user:${users}"></h4>
+<hr/>
+<h4>
+    <span th:each="user:${users}">[[${user}]]</span>
+</h4>
 </body>
 </html>
