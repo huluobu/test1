@@ -93,7 +93,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
 ```
 如果加上@enablewebmvc默认配置会失效  
 ####restfulcrud使用
-1.加载自己的index页面
+* **加载自己的index页面**
 ``` java
  @Bean
     public WebMvcConfigurer webMvcConfigurer(){
@@ -106,7 +106,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
          };
          return configurer;
 ```
-2.国际化配置设置国际化文件配置的路径spring.messages.basename=i18n.login  
+* **国际化配置**设置国际化文件配置的路径spring.messages.basename=i18n.login    
 根据请求头解析区域信息解析器
 ``` java 
 login.btm=登录
@@ -115,7 +115,42 @@ login.rememberme=记住我
 login.tip=请登录
 login.username=用户名
 ```
-3.
+创建本地的locale 解析器
+``` java
+public class MyLocalResolver implements LocaleResolver {
+
+
+    @Override
+    public Locale resolveLocale(HttpServletRequest httpServletRequest) {
+        String l =httpServletRequest.getParameter("l");
+        Locale locale=Locale.getDefault();
+        if(!StringUtils.isEmpty(l)){
+            String[] split=l.split("_");
+            locale = new Locale(split[0],split[1]);
+        }
+        return locale;
+    }
+
+    @Override
+    public void setLocale(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Locale locale) {
+
+    }
+}
+```
+mvc配置中加入解析器
+``` java
+@Bean
+    public LocaleResolver localeResolver(){
+        return new MyLocalResolver();
+    }
+```
+*  **登录**  
+1). 禁止thmyleaf缓存
+``` java
+spring.thymeleaf.cache=false
+```
+2). 
+
 
 
 
