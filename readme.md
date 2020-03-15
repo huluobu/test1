@@ -149,9 +149,11 @@ mvc配置中加入解析器
 ``` java
 spring.thymeleaf.cache=false
 ```
-2). 
-
-
+2). input标签页设置
+``` html
+<input type="text" name="username"
+```
+3). 拦截器登录检查
 
 
 

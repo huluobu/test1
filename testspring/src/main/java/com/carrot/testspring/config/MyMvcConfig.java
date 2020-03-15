@@ -1,9 +1,11 @@
 package com.carrot.testspring.config;
 
+import com.carrot.testspring.component.LoginHandlerInterceptor;
 import com.carrot.testspring.component.MyLocalResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -25,6 +27,15 @@ public class MyMvcConfig implements WebMvcConfigurer {
              public void addViewControllers(ViewControllerRegistry registry) {
                  registry.addViewController("/").setViewName("login");
                  registry.addViewController("/index.html").setViewName("login");
+                 registry.addViewController("/main.html").setViewName("dashboard");
+//                 registry.addViewController("/emp/list").setViewName("list");
+
+             }
+
+             @Override
+             public void addInterceptors(InterceptorRegistry registry) {
+                 registry.addInterceptor(new LoginHandlerInterceptor())
+                         .excludePathPatterns("/", "/index", "/index.html", "/user/login", "/asserts/**");
              }
          };
          return configurer;
