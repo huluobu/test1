@@ -62,8 +62,9 @@
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 
-					<form th:action="@{/emp}" method="put">
+					<form th:action="@{/emp}" method="post">
 <!--						<input type="hidden" name="_method" value="put" th:if="$(emp!=null)">-->
+						<input type="hidden" name="_method" value="put" >
 						<input type="hidden" name="id" th:if="${emp!=null}" th:value="${emp.id}">
 						<div class="form-group">
 							<label>LastName</label>
@@ -92,7 +93,7 @@
 						</div>
 						<div class="form-group">
 							<label>Birth</label>
-							<input name="birth" type="text" class="form-control" placeholder="zhangsan" th:value="${#dates.format(emp.birth,'yyyy-MM-dd HH:mm')}">
+							<input name="birth" type="text" class="form-control" placeholder="zhangsan" th:value="${emp.birth}">
 						</div>
 						<button type="submit" class="btn btn-primary" >修改</button>
 					</form>

@@ -154,6 +154,35 @@ spring.thymeleaf.cache=false
 <input type="text" name="username"
 ```
 3). 拦截器登录检查
+``` java
+public class LoginHandlerInterceptor implements HandlerInterceptor {
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        Object user=request.getSession().getAttribute("loginUser");
+        if(user == null){
+            request.setAttribute("msg","请先登录");
+            request.getRequestDispatcher("/index.html").forward(request,response);
+            return false;
+        }else {
+            return true;
+        }
+
+    }
+```
+mymvcconfig注册拦截器
+``` java
+public void addInterceptors(InterceptorRegistry registry) {
+                 registry.addInterceptor(new LoginHandlerInterceptor())
+                         .excludePathPatterns("/", "/index", "/index.html", "/user/login", "/asserts/**");
+             }
+         };
+```
+4) CRUD员工列表实现
+1. 确定跳转请求 /get /post /emp 等等；   
+2. 填写控制器 @getmapping  or @postmapping
+3. 注意html中form表单只支持GET与POST请求，而DELETE、PUT等method并不支持，spring3添加了一个过滤器，可以将这些请求转换为标准的http方法，使得支持GET、POST、PUT与DELETE请求。 
+4. 由源码可以看出，filter只对Post方法进行过滤，且需要添加参数名为_method的隐藏域，也可以设置其他参数名，比如想设置为_method_，可以在HiddenHttpMethodFilter配置类中设置初始化参数：put (methodParam,"_method_")  
+
 
 
 

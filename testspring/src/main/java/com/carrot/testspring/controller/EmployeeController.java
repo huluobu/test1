@@ -59,9 +59,9 @@ public class EmployeeController {
     }
     @PutMapping ("/emp")
     public String updateEmployee(Employee employee){
-        System.out.println(employee);
+        System.out.println("修改的员工数据"+employee);
         employeeDao.save(employee);
-        return "redirect:/emps/list";
+        return "redirect:/emps";
     }
 }
 
