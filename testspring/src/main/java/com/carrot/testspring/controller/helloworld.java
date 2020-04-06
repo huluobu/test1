@@ -1,9 +1,11 @@
 package com.carrot.testspring.controller;
 
+import com.carrot.testspring.exceptiom.UserNotExistException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Arrays;
@@ -18,7 +20,10 @@ public class helloworld {
     private  String name;
     @RequestMapping(value = "/hellow",method= RequestMethod.GET)
     @ResponseBody
-    public String hellow(){
+    public String hellow(@RequestParam("user") String username){
+        if(username.equals("aaa")){
+            throw new UserNotExistException();
+        }
         return "hellow carrot"+name;
     }
 

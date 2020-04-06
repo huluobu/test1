@@ -1,6 +1,7 @@
 package com.carrot.testspring.config;
 
 import com.carrot.testspring.component.LoginHandlerInterceptor;
+import com.carrot.testspring.component.MyErrorAttributes;
 import com.carrot.testspring.component.MyLocalResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,4 +45,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
     public LocaleResolver localeResolver(){
         return new MyLocalResolver();
     }
+
+    @Bean
+    public MyErrorAttributes myErrorAttributes(){return new MyErrorAttributes();}
 }
