@@ -5,22 +5,25 @@ import com.carrot.testspring.dao.DepartmentDao;
 import com.carrot.testspring.dao.EmployeeDao;
 import com.carrot.testspring.entities.Department;
 import com.carrot.testspring.entities.Employee;
+import com.carrot.testspring.mapper.EmployeeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.sql.Connection;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author carrot
  */
 @Controller
 public class EmployeeController {
+
+    @Autowired
+    private EmployeeMapper employeeMapper;
+
+
     @Autowired
     private EmployeeDao employeeDao;
     @Autowired
@@ -62,6 +65,13 @@ public class EmployeeController {
         System.out.println("修改的员工数据"+employee);
         employeeDao.save(employee);
         return "redirect:/emps";
+    }
+
+
+    @ResponseBody
+    @GetMapping("/empt")
+    public List<com.carrot.testspring.bean.Employee> getall(){
+        return  employeeMapper.selectAll();
     }
 }
 
