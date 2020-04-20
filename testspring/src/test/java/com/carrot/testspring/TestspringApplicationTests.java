@@ -6,19 +6,28 @@ import org.apache.catalina.core.ApplicationContext;
 import org.junit.Test;
 
 //import org.junit.platform.commons.logging.LoggerFactory;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 //import org.junit.platform.commons.logging.Logger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLClientInfoException;
+import java.sql.SQLException;
 
-
+@RunWith(SpringRunner.class)
 @SpringBootTest
-class TestspringApplicationTests {
+public class TestspringApplicationTests {
 
     @Autowired
     Persion persion;
+
+    @Autowired
+    DataSource dataSource;
 
     Logger log=LoggerFactory.getLogger((getClass()));
 
@@ -30,7 +39,7 @@ class TestspringApplicationTests {
         return ioc.
     }*/
 
-    @Test
+/*    @Test
     void contextLoads() {
         System.out.println(persion);
         log.trace("this is trace...");
@@ -38,6 +47,13 @@ class TestspringApplicationTests {
         log.info("this is info");
         log.warn("this is warn");
         log.error("this is error");
-    }
+    }*/
 
+     @Test
+     public void  contextLoads() throws SQLException {
+        System.out.println(dataSource.getClass());
+        Connection connection=dataSource.getConnection();
+        System.out.println(connection);
+        connection.close();
+    }
 }

@@ -40,7 +40,7 @@ public class EmployeeDao {
 		employees.put(employee.getId(), employee);
 	}
 	
-	public Collection<Employee> getAll(){
+	public Collection<Employee>  getAll(){
 		return employees.values();
 	}
 	
