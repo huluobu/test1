@@ -2,16 +2,14 @@ package com.carrot.testcloud.controller;
 
 import com.carrot.testcloud.entities.CommonResult;
 import com.carrot.testcloud.entities.Payment;
-import com.carrot.testcloud.service.PaymentSerice;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
+import java.util.UUID;
 
 /**
  * @author carrot
@@ -19,14 +17,12 @@ import java.util.List;
 @RestController
 @Slf4j
 public class PaymentController {
-    @Resource
-    private PaymentSerice paymentSerice;
-
-    @Resource
-    private DiscoveryClient discoveryClient;
-
     @Value("${server.port}")
     private  String serverPort;
+    /*@Resource
+    private PaymentSerice paymentSerice;
+
+
 
     @PostMapping(value = "/payment/create")
     public CommonResult create(@RequestBody Payment payment){
@@ -49,17 +45,9 @@ public class PaymentController {
             return  new CommonResult(444,"查询数据失败"+serverPort+id,null);
         }
     }
-
-    @GetMapping(value = "/payment/discovery")
-    public Object discovery(){
-        List<String> services = discoveryClient.getServices();
-        for(String element:services){
-            log.info("service:"+element);
-            List<ServiceInstance> instances = discoveryClient.getInstances(element);
-            for(ServiceInstance instance:instances){
-                log.info(instance.getInstanceId()+"*"+instance.getHost()+"*"+instance.getPort()+"*"+instance.getUri());
-            }
-        }
-        return this.discoveryClient;
+*/
+    @GetMapping(value = "/payment/zk")
+    public String paymentZk(){
+        return serverPort+ UUID.randomUUID().toString();
     }
 }

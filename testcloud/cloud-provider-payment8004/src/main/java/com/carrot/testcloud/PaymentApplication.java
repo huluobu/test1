@@ -2,14 +2,17 @@ package com.carrot.testcloud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+
 
 /**
- * @author carrot
+ * create by: carrot
+ * classname: PaymentApplication
+ * description: use to zookeeper
+ * create time: 2020/4/20 21:13
  */
-@SpringBootApplication
-@EnableEurekaClient
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @EnableDiscoveryClient
 public class PaymentApplication {
     public static void main(String[] args) {
