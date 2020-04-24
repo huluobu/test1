@@ -7,7 +7,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.0.104:3306/springcloud
+    url: jdbc:mysql://192.168.0.103:3306/springcloud
     username: root
     password: 123456
 
