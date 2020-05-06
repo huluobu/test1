@@ -10,7 +10,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 
 /**
- * @author     ：mmzs
+ * @author     ：carrot
  * @date       ：Created in 2020/4/20 10:45
  * @description：eureka server start up
  * @modified By：
