@@ -1,5 +1,6 @@
 package com.carrot.testspring.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,10 @@ import java.util.Map;
  */
 @Controller
 public class LoginController {
+
+/*    @Autowired
+    HttpSession session;*/
+
     @PostMapping(value = "/user/login")
     public String login(@RequestParam("username") String username,
                         @RequestParam("password") String password,

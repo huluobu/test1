@@ -184,6 +184,8 @@ public void addInterceptors(InterceptorRegistry registry) {
 4. 由源码可以看出，filter只对Post方法进行过滤，且需要添加参数名为_method的隐藏域，也可以设置其他参数名，比如想设置为_method_，可以在HiddenHttpMethodFilter配置类中设置初始化参数：put (methodParam,"_method_")  
 
 
+https://blog.csdn.net/liuweilong07/article/details/80396055?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1
+
 
 
 
