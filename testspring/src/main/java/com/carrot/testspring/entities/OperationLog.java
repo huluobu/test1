@@ -14,6 +14,7 @@ import java.util.Date;
 public class OperationLog {
 
     private  String userid;
+    private String username;
     private Date creatime;
     private String ip;
     private String method;
@@ -21,10 +22,12 @@ public class OperationLog {
     private String operType;
     private String operDesc;
 
+
     @Override
     public String toString() {
         return "OperationLog{" +
                 "userid='" + userid + '\'' +
+                ", username='" + username + '\'' +
                 ", creatime=" + creatime +
                 ", ip='" + ip + '\'' +
                 ", method='" + method + '\'' +

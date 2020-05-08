@@ -2,6 +2,7 @@ package com.carrot.testspring.aop;
 import com.carrot.testspring.annotation.OperateLog;
 import com.carrot.testspring.annotation.OperateLog;
 import com.carrot.testspring.entities.OperationLog;
+import com.carrot.testspring.entities.User;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -46,10 +47,12 @@ public class OperateLogAspect {
         OperationLog systemLog = new OperationLog();
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        request.getSession().getAttribute("loginUser");
+        Object user=request.getSession().getAttribute("loginUser");
+
 
         systemLog.setUserid("001");
 
+//        systemLog.setUsername(user.toString());
         String ip =request.getRemoteAddr();
         systemLog.setIp(ip);
 
