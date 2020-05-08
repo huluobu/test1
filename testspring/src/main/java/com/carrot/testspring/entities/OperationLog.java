@@ -13,24 +13,24 @@ import java.util.Date;
 @Data
 public class OperationLog {
 
-    private  String id;
+    private  String userid;
     private Date creatime;
-    private String operationUnit;
+    private String ip;
     private String method;
-    private String userId;
-    private Long runTime;
-    private String returnValue;
+    private String operModul;
+    private String operType;
+    private String operDesc;
 
     @Override
     public String toString() {
         return "OperationLog{" +
-                "id='" + id + '\'' +
+                "userid='" + userid + '\'' +
                 ", creatime=" + creatime +
-                ", operationUnit='" + operationUnit + '\'' +
+                ", ip='" + ip + '\'' +
                 ", method='" + method + '\'' +
-                ", userId='" + userId + '\'' +
-                ", runTime=" + runTime +
-                ", returnValue='" + returnValue + '\'' +
+                ", operModul='" + operModul + '\'' +
+                ", operType='" + operType + '\'' +
+                ", operDesc='" + operDesc + '\'' +
                 '}';
     }
 }

@@ -1,5 +1,6 @@
 package com.carrot.testspring.controller;
 
+import com.carrot.testspring.annotation.OperateLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -19,6 +20,7 @@ public class LoginController {
     HttpSession session;*/
 
     @PostMapping(value = "/user/login")
+    @OperateLog(operateModule = "登录模块",operateDescription = "初始登录",operateType = "login")
     public String login(@RequestParam("username") String username,
                         @RequestParam("password") String password,
                         Map<String,Object> map, HttpSession session){

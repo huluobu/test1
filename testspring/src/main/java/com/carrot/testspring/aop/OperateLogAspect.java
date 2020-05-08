@@ -1,13 +1,21 @@
 package com.carrot.testspring.aop;
-import com.carrot.testcloud.annotation.OperateLog;
 import com.carrot.testspring.annotation.OperateLog;
+import com.carrot.testspring.annotation.OperateLog;
+import com.carrot.testspring.entities.OperationLog;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
+import java.util.Date;
 
 /**
  * @Author: carrot
@@ -19,9 +27,10 @@ public class OperateLogAspect {
 
 
 
+    private static final Logger LOG = LoggerFactory.getLogger(OperateLogAspect.class);
     /*    private OperationLogService operationLogService;*/
 
-    @Pointcut("@annotation(com.carrot.testcloud.annotation.OperateLog)")
+    @Pointcut("@annotation(com.carrot.testspring.annotation.OperateLog)")
     public void operateLogPointCut() {
 
     }
@@ -30,17 +39,35 @@ public class OperateLogAspect {
     public void operateExceptionLogPointCut() {
     }*/
 
+
+    @Around(value = "@annotation(com.carrot.testspring.annotation.OperateLog)")
     public void saveOperateLog(JoinPoint joinPoint, Object keys) {
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();// 获取切入点所在的方法
-        Method method = signature.getMethod();  // 获取操作
-        OperateLog opLog = method.getAnnotation(OperateLog.class);
-        if (opLog != null) {
-            String operModul = opLog.operateModule();
-            String operType = opLog.operateType();
-            String operDesc = opLog.operateDescription();
-/*          operlog.setOperModul(operModul); // 操作模块
-            operlog.setOperType(operType); // 操作类型
-            operlog.setOperDesc(operDesc); // 操作描述*/
+
+        OperationLog systemLog = new OperationLog();
+
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        request.getSession().getAttribute("loginUser");
+
+        systemLog.setUserid("001");
+
+        String ip =request.getRemoteAddr();
+        systemLog.setIp(ip);
+
+        systemLog.setCreatime(new Date());
+
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        String name = signature.getName();
+        Method method=signature.getMethod();
+        systemLog.setMethod(name);
+        OperateLog annotation = method.getAnnotation(OperateLog.class);
+        if (annotation != null) {
+            String operModul = annotation.operateModule();
+            String operType = annotation.operateType();
+            String operDesc = annotation.operateDescription();
+            systemLog.setOperModul(operModul);
+            systemLog.setOperType(operType);
+            systemLog.setOperDesc(operDesc);
         }
+        LOG.info("记录日志:" + systemLog.toString());
     }
 }
