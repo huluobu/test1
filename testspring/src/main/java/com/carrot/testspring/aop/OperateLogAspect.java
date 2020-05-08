@@ -41,7 +41,7 @@ public class OperateLogAspect {
 
 
     @Around(value = "@annotation(com.carrot.testspring.annotation.OperateLog)")
-    public void saveOperateLog(JoinPoint joinPoint, Object keys) {
+    public void saveOperateLog(JoinPoint joinPoint) {
 
         OperationLog systemLog = new OperationLog();
 
