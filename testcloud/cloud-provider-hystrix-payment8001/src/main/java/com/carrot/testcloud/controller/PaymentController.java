@@ -1,6 +1,7 @@
 package com.carrot.testcloud.controller;
 
 import com.carrot.testcloud.service.PaymentService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,7 @@ public class PaymentController {
         log.info("----------result is"+result);
         return result;
     }
+
 
     @GetMapping("/payment/hystrix/timeout/{id}")
     public String paymentInfo_timeout(@PathVariable("id") Integer id){

@@ -2,9 +2,11 @@ package com.carrot.testcloud.controller;
 
 import com.carrot.testcloud.entities.CommonResult;
 import com.carrot.testcloud.entities.Payment;
+import com.carrot.testcloud.exception.PaymentException;
+import com.carrot.testcloud.exception.common.BaseException;
+import com.carrot.testcloud.exception.enums.ResponseEnum;
 import com.carrot.testcloud.service.PaymentSerice;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -43,12 +45,18 @@ public class PaymentController {
     public CommonResult getPaymentById(@PathVariable("id") long id){
         Payment payment=paymentSerice.getPaymentById(id);
         log.info("************查询结果："+payment);
-        if(payment!=null){
-            return  new CommonResult(200,"查询数据成功"+serverPort,payment);
-        }else {
-            return  new CommonResult(444,"查询数据失败"+serverPort+id,null);
-        }
+        ResponseEnum.PAYMENT_NOT_FOUND.assertNotNull(payment);
+        return  new CommonResult(200,"查询数据成功"+serverPort,payment);
+
     }
+
+    @ExceptionHandler(value = PaymentException.class)
+    @ResponseBody
+    public  CommonResult handlePaymentException(BaseException e){
+        log.info(e.getMessage(),e);
+        return new CommonResult(e.getCode(),e.getMessage());
+    }
+
 
     @GetMapping(value = "/payment/discovery")
     public Object discovery(){

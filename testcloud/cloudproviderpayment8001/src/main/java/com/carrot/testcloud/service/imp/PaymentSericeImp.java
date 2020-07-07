@@ -3,7 +3,6 @@ package com.carrot.testcloud.service.imp;
 import com.carrot.testcloud.dao.PaymentDao;
 import com.carrot.testcloud.entities.Payment;
 import com.carrot.testcloud.service.PaymentSerice;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,6 +21,7 @@ public class PaymentSericeImp implements PaymentSerice {
 
     @Override
     public Payment getPaymentById(long id) {
-        return paymentDao.getPaymentById(id);
+        Payment payment=paymentDao.getPaymentById(id);
+        return payment;
     }
 }
