@@ -12,4 +12,7 @@ public class Consumer implements Serializable {
     private  long id;
     private String address;
     private  String iden;
-	private  int age;	private Date birth;}
+	private  String age;
+	private Date birth;
+	private  double weight;
+}
