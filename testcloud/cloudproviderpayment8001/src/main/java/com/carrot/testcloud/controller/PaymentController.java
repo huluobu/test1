@@ -44,8 +44,9 @@ public class PaymentController {
     @GetMapping (value = "/payment/get/{id}")
     public CommonResult getPaymentById(@PathVariable("id") long id){
         Payment payment=paymentSerice.getPaymentById(id);
-        log.info("************查询结果："+payment);
+
         ResponseEnum.PAYMENT_NOT_FOUND.assertNotNull(payment);
+        log.info("************查询结果："+payment);
         return  new CommonResult(200,"查询数据成功"+serverPort,payment);
 
     }
