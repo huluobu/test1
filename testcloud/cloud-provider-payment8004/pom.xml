@@ -81,11 +81,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-zookeeper-discovery</artifactId>
             <version>2.2.1.RELEASE</version>
-            <exclusions>
-                <groupId>org.apache.zookeeper</groupId>
-                <artifactId>zookeeper</artifactId>
-<!--                <version></version>-->
-            </exclusions>
 
         </dependency>
 
