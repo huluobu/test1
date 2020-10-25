@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.carrot.train.mapper.FilmMapper">
+
+    <resultMap id="filmresult" type="com.carrot.train.entity.Film">
+        <id column="id" property="id"/>
+        <result column="filmname" property="filmname"/>
+        <result column="filmtype" property="filmtype"/>
+        <result column="filminfo" property="filminfo"/>
+        <result column="filmprice" property="filmprice"/>
+        <result column="sales" property="sales"/>
+        <result column="imgpath" property="imgpath"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.carrot.train.entity.Film">
+        INSERT INTO f_film(id, filmname,filmtype, filminfo, filmprice,sales,imgpath,status)
+        VALUES(#{id}, #{filmname}, #{filmtype},#{filminfo}, #{filmprice},#{sales},#{imgpath},#{status})
+    </insert>
+
+    <update id="update" parameterType="com.carrot.train.entity.Film">
+        UPDATE f_film
+        <set>
+            <if test="null != filmname">filmname=#{filmname},</if>
+            <if test="null != filmtype">filmtype=#{filmtype},</if>
+            <if test="null != filminfo">filminfo=#{filminfo},</if>
+            <if test="null != filmprice">filmprice=#{filmprice},</if>
+            <if test="null != sales">sales=#{sales},</if>
+            <if test="null != imgpath">imgpath=#{imgpath},</if>
+            <if test="null != status">status=#{status}</if>
+        </set>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+
+    <select id="findByPrimaryKey" parameterType="Integer" resultType="com.carrot.train.entity.Film">
+        SELECT * FROM f_film WHERE id=#{primaryKey}
+    </select>
+
+<!--    <select id="findByPrimaryId" parameterType="Integer" resultMap="filmresult">-->
+<!--        SELECT id fmid,filmname, filmtype, filminfo,filmprice,sales,imgpath,status FROM f_film WHERE id=#{id}-->
+<!--    </select>-->
+    <select id="findByPrimaryId" parameterType="Integer" resultMap="filmresult">
+        SELECT * FROM f_film WHERE id=#{id}
+    </select>
+
+    <select id="findByFilmname" parameterType="String" resultMap="filmresult">
+        SELECT * FROM f_film WHERE filmname=#{filmname}
+    </select>
+
+
+    <select id="selectAllFilm" resultType="com.carrot.train.entity.Film">
+        SELECT * FROM f_film
+    </select>
+
+</mapper>

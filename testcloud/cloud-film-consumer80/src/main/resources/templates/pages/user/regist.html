@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>光大会员注册页面</title>
+	<base href="http://localhost:8080/film/">
+	<link type="text/css" rel="stylesheet" href="css/style.css" >
+	<script type="text/javascript" src="script/jquery-1.7.2.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$("#sub_btn").click(function () {
+				var usernametext = $("#username").val();
+				var usernamepat = /^\w{5,12}$/;
+				if (!usernamepat.test(usernametext)) {
+					$("#frontmsg").text("输入的用户不合法");
+					return false;
+				}
+				$("#frontmsg").text("");
+				var passwordtext = $("#password").val();
+				var passwordpat = /^\w{5,12}$/;
+				if (!passwordpat.test(passwordtext)) {
+					$("#frontmsg").text("输入的密码不合法");
+					return false;
+				}
+				$("#frontmsg").text("");
+				var repwdtext = $("#repwd").val();
+				if (repwdtext!=passwordtext) {
+					$("#frontmsg").text("确认密码不一致");
+					return false;
+				}
+				$("#frontmsg").text("");
+
+				var mailtext = $("#email").val();
+				var mailpat = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+				if (mailtext != "") {
+					if (!mailpat.test(mailtext)) {
+						$("#frontmsg").text("邮箱内容不合法");
+						return false;
+					}else{
+						return true;
+					}
+				}else {
+					$("#frontmsg").text("邮箱内容不为空");
+					return false;
+				}
+				$("#frontmsg").text("");
+				$("#backmsg").text("");
+			});
+
+		});
+
+	</script>
+	<script type="text/javascript" src="static/script/jquery-1.7.2.js"></script>
+<!--	<script type="text/javascript" src="static/script/jquery-1.7.2.js">-->
+<!--		var bm=$("#backmsg").val()-->
+<!--		if (bm.length > 0) {-->
+<!--			alert(bm);-->
+<!--		}-->
+
+<!--	</script>-->
+	<style type="text/css">
+		.login_form{
+			height:420px;
+			margin-top: 25px;
+		}
+
+	</style>
+</head>
+<body>
+<div id="header">
+<!--	<img class="logo_img" alt="" src="static/img/logo2.gif" >-->
+	<span class="wel_word">光大影城</span>
+</div>
+
+<div class="login_banner">
+
+	<div id="l_content">
+		<span class="login_word">欢迎注册</span>
+	</div>
+
+	<div id="content">
+		<div class="login_form">
+			<div class="login_box">
+				<div class="tit">
+					<h1>注册光大会员</h1>
+					<span class="errorMsg" name="frontmsg" id="frontmsg"></span>
+					<span class="errorMsg" name="backmsg" id="backmsg" th:text="${#request.getAttribute('msg')}" ></span>
+<!--					<input type="hidden" id="" id="backmsg" name="backmsg" th:value="${msg}">-->
+<!--					<span th:type="hidden" th:id="backmsg" th:name="backmsg" th:data="${msg}"></span>-->
+				</div>
+				<div class="form">
+					<form action="submitRegister" method="post">
+						<label>用户名称：</label>
+						<input class="itxt" type="text" placeholder="请输入用户名" autocomplete="off" tabindex="1" name="username" id="username"
+							   th:value="${#request.getAttribute('username')!=null}?${#request.getAttribute('username')}:''" />
+						<br />
+						<br />
+						<label>用户密码：</label>
+						<input class="itxt" type="password" placeholder="请输入密码" autocomplete="off" tabindex="1" name="password" id="password" />
+						<br />
+						<br />
+						<label>确认密码：</label>
+						<input class="itxt" type="password" placeholder="确认密码" autocomplete="off" tabindex="1" name="repwd" id="repwd" />
+						<br />
+						<br />
+						<label>电子邮件：</label>
+						<input class="itxt" type="text" placeholder="请输入邮箱地址" autocomplete="off" tabindex="1" name="email" id="email"
+							   th:value="${#request.getAttribute('email')!=null}?${#request.getAttribute('email')}:''"/>
+						<br />
+						<br />
+						<!--									<label>验证码：</label>-->
+						<!--									<input class="itxt" type="text" style="width: 150px;" id="code"/>-->
+						<!--									<img alt="" src="../../static/img/code.bmp" style="float: right; margin-right: 40px">									-->
+						<br />
+						<br />
+						<input type="submit" value="注册" id="sub_btn" />
+
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+<div id="bottom">
+			<span>
+				光大影城.Copyright &copy;2015
+			</span>
+</div>
+</body>
+</html>

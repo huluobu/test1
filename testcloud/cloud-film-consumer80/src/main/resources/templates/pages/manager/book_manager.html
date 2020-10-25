@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>图书管理</title>
+	<base href="http://localhost:8080/film/">
+<link type="text/css" rel="stylesheet" href="css/style.css" >
+	<script type="text/javascript" src="script/jquery-1.7.2.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$("a.deleteClass").click(function () {
+				// 在事件的function函数中，有一个this对象。这个this对象，是当前正在响应事件的dom对象。
+				return confirm("你确定要删除【" +  $(this).parent().parent().find("td:eq(0)").text() +":"+$(this).parent().parent().find("td:eq(1)").text()+"】?");
+			});
+
+			$("a.updateClass").click(function () {
+				// 在事件的function函数中，有一个this对象。这个this对象，是当前正在响应事件的dom对象。
+				return confirm("你确定要修改【" +  $(this).parent().parent().find("td:eq(0)").text() +":"+$(this).parent().parent().find("td:eq(1)").text()+"】?");
+			});
+		});
+	</script>
+</head>
+<body>
+	
+	<div id="header">
+			<img class="logo_img" alt="" src="img/logo.gif" >
+			<span class="wel_word">电影管理系统</span>
+			<div>
+				<a href="manager/film/list">电影管理</a>
+				<a href="manager/match/list">场次管理</a>
+				<a href="manager/order/list">订单管理</a>
+				<a href="pages/home">返回商城</a>
+			</div>
+	</div>
+	
+	<div id="main">
+		<table>
+			<tr>
+				<td>id</td>
+				<td>电影名</td>
+				<td>类型</td>
+				<td>创作人员</td>
+				<td>价格</td>
+				<td>观影人次</td>
+				<td>状态</td>
+				<td colspan="3">操作</td>
+			</tr>		
+			<tr th:each="film : ${#request.getAttribute('filmlist')}" >
+				<td name="filmid" id="filmid" th:text="${film.id}"></td>
+				<td name="filmname" id="filmname" th:text="${film.filmname}"></td>
+				<td th:text="${film.filmtype}"></td>
+				<td th:text="${film.filminfo}"></td>
+				<td th:text="${film.filmprice}"></td>
+				<td th:text="${film.sales}"></td>
+				<td th:text="${film.status}"></td>
+<!--				<td><a href="book_edit.html">修改</a></td>-->
+				<td><a class="updateClass" th:href="@{manager/film/query(id=${film.id})}">修改</a></td>
+<!--				<td><a href="manager/film/delete&id='${film.id}'">删除</a></td>-->
+				<td><a class="deleteClass" th:href="@{manager/film/delete(id=${film.id})}">删除</a></td>
+			</tr>	
+
+			
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><a href="manager/film/page">添加电影</a></td>
+			</tr>	
+		</table>
+	</div>
+	
+	<div id="bottom">
+		<span>
+			尚硅谷书城.Copyright &copy;2015
+		</span>
+	</div>
+</body>
+</html>

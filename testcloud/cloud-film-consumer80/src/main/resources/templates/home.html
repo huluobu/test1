@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <base href="http://localhost:8080/film/">
+    <title>影城首页</title>
+    <link type="text/css" rel="stylesheet" href="css/style.css" >
+	<script type="text/javascript" src="script/jquery-1.7.2.js"></script>
+	<script type="text/javascript">
+
+		// $(function () {
+		// 	$("butten.addtoseats").click(function () {
+		// 		var id=$(this).attr("matchid")
+		// 		location.href="http://localhost:8080/film/cart/addseats?matchid="+id;
+		// 	})
+		// })
+
+	</script>
+</head>
+<body>
+	
+	<div id="header">
+			<img class="logo_img" alt="" src="img/logo2.gif" >
+			<span class="wel_word">影城订票</span>
+		<span>
+			<div th:style="${session.username==null}?'display:block;':'display:none;'">
+				<a href="pages/user" id="login" name="login" >登录</a>
+				<a href="pages/regist">注册</a>
+			</div>
+			<div th:style="${session.username!=null}?'display:block;':'display:none;'">
+				<a href="manager/order/list">我的订单</a>
+				<a href="pages/manager" th:style="${session.username=='admin'}?'display:block;':'display:none;'">后台管理</a>
+				<a href="logout">注销</a>
+			</div>
+		</span>
+
+
+	</div>
+	<div id="main">
+        <div class="main_left" style="height:100%">
+                        <ul type="disc">
+                           <li>CBD店</li>
+                           <li>金融街店</li>
+                           <li>石景山店</li>
+                           <li>怀柔店</li>
+                       </ul>
+        </div>
+		<div id="book">
+
+            <div class="book_cond">
+				<form action="manager/match/submitmatch" method="get">
+                    <input name="location" type="text" th:value="CBD店"/>
+
+				    放映厅<select name="halltype" th:value="3D">
+                            <option value="3D">3D</option>
+                            <option value="2D">2D</option>
+                            <option value="child">child</option>
+                            </select>
+                    上映日期<input  name= "begindatetime" type="datetime-local" />
+                    <input type="submit" value="搜索"  />
+				</form>
+			</div>
+
+			<div class="b_list" th:each="filmmatch : ${#request.getAttribute('film')}">
+
+                <div class="img_div">
+					<img class="book_img" alt="" src="static/img/logo2.jpg" />
+				</div>
+				<span id="filmid" name="filmname"  type="hidden" th:text="${filmmatch.id}"></span>>
+				<div class="book_info">
+					<div class="book_name">
+						<span class="sp1">电影名:</span>
+						<span class="sp2" th:text="${filmmatch.film.filmname}"></span>
+					</div>
+					<div class="book_author">
+						<span class="sp1">电影类型:</span>
+						<span class="sp2" th:text="${filmmatch.film.filmtype}"></span>
+					</div>
+					<div class="book_price">
+						<span class="sp1">主演：</span>
+						<span class="sp2" th:text="${filmmatch.film.filminfo}">姜武</span>
+					</div>
+					<div class="book_add">
+						<a  th:class="addtoseats"  th:href="@{cart/addseats(matchid=${filmmatch.id})}">购票</a>
+					</div>
+				</div>
+			</div>
+
+
+            </div>
+
+
+		</div>
+		
+		<div id="page_nav">
+		<a href="#">首页</a>
+		<a href="#">上一页</a>
+		<a href="#">3</a>
+		【4】
+		<a href="#">5</a>
+		<a href="#">下一页</a>
+		<a href="#">末页</a>
+		共10页，30条记录 到第<input value="4" name="pn" id="pn_input"/>页
+		<input type="button" value="确定">
+		</div>
+	
+	</div>
+	
+	<div id="bottom">
+		<span>
+			光大影城订票.Copyright &copy;2015
+		</span>
+	</div>
+</body>
+<script type="text/javascript" src="script/jquery-1.7.2.js"></script>
+<script type="text/javascript">
+    var bm=$("#msg").val()
+/*    if (bm != "") {
+        $("#a.login").style.display = "block";
+    }*/
+    if (bm == "") {
+        $("#a.login").style.display ="none";
+    }
+
+
+</script>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>图书管理</title>
+    <base href="http://localhost:8080/film/">
+    <link type="text/css" rel="stylesheet" href="css/style.css" >
+    <script type="text/javascript" src="script/jquery-1.7.2.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("a.deleteClass").click(function () {
+                // 在事件的function函数中，有一个this对象。这个this对象，是当前正在响应事件的dom对象。
+                return confirm("你确定要删除【" +  $(this).parent().parent().find("td:eq(0)").text() +":"+$(this).parent().parent().find("td:eq(1)").text()+"】?");
+            });
+
+            $("a.updateClass").click(function () {
+                // 在事件的function函数中，有一个this对象。这个this对象，是当前正在响应事件的dom对象。
+                return confirm("你确定要修改【" +  $(this).parent().parent().find("td:eq(0)").text() +":"+$(this).parent().parent().find("td:eq(1)").text()+"】?");
+            });
+        });
+    </script>
+</head>
+<body>
+
+<div id="header">
+    <img class="logo_img" alt="" src="img/logo2.gif" >
+    <span class="wel_word">电影管理系统</span>
+    <div>
+        <a href="manager/film/list">电影管理</a>
+        <a href="manager/match/list">场次管理</a>
+        <a href="manager/order/list">订单管理</a>
+        <a href="pages/home">返回商城</a>
+    </div>
+</div>
+
+<div id="main">
+    <table>
+        <tr>
+            <td>id</td>
+            <td>电影id</td>
+            <td>店名</td>
+            <td>放映厅类型</td>
+            <td>影票价格</td>
+            <td>销量</td>
+            <td>创建时间</td>
+            <td>剩余空位</td>
+            <td>状态</td>
+            <td colspan="3">操作</td>
+        </tr>
+        <tr th:each="filmMatch : ${#request.getAttribute('filmMatchList')}" >
+            <td name="filmid" id="filmid" th:text="${filmMatch.id}"></td>
+            <td name="filmname" id="filmname" th:text="${filmMatch.filmid}"></td>
+            <td th:text="${filmMatch.location}"></td>
+            <td th:text="${filmMatch.halltype}"></td>
+            <td th:text="${filmMatch.filmprice}"></td>
+            <td th:text="${filmMatch.sales}"></td>
+            <td th:text="${#dates.format(filmMatch.begindate,'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${filmMatch.reseats}"></td>
+            <td th:text="${filmMatch.status}"></td>
+            <!--				<td><a href="book_edit.html">修改</a></td>-->
+            <td><a class="updateClass" th:href="@{manager/match/query(id=${filmMatch.id})}">修改</a></td>
+            <!--				<td><a href="manager/film/delete&id='${film.id}'">删除</a></td>-->
+            <td><a class="deleteClass" th:href="@{manager/match/delete(id=${filmMatch.id})}">删除</a></td>
+        </tr>
+
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a href="manager/match/page">添加电影</a></td>
+        </tr>
+    </table>
+</div>
+
+<div id="bottom">
+		<span>
+			尚硅谷书城.Copyright &copy;2015
+		</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.carrot.train.mapper.FilmOrderMapper">
+
+    <insert id="insert" parameterType="com.carrot.train.entity.FilmOrder">
+        INSERT INTO f_filmorder(id, matchid,userid, seatnum, totalprice,ordertime,updatatime,price,status)
+        VALUES(#{id}, #{matchid}, #{userid},#{seatnum}, #{totalprice},#{ordertime},#{updatatime},#{price},#{status})
+    </insert>
+
+    <update id="update" parameterType="com.carrot.train.entity.FilmOrder">
+        UPDATE f_filmorder
+        <set>
+            <if test="null != matchid">matchid=#{matchid},</if>
+            <if test="null != userid">userid=#{userid},</if>
+            <if test="null != seatnum">seatnum=#{seatnum},</if>
+            <if test="null != totalprice">totalprice=#{totalprice},</if>
+            <if test="null != ordertime">ordertime=#{ordertime},</if>
+            <if test="null != updatatime">updatatime=#{updatatime},</if>
+            <if test="null != price">price=#{price},</if>
+            <if test="null != status">status=#{status}</if>
+        </set>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+
+    <select id="findByPrimaryKey" parameterType="Integer" resultType="com.carrot.train.entity.FilmOrder">
+        SELECT * FROM f_filmorder WHERE id=#{primaryKey}
+    </select>
+
+    <select id="selectFilmOrderByParams" parameterType="java.util.HashMap" resultType="com.carrot.train.entity.FilmOrder">
+        SELECT * FROM f_filmorder
+        <where>
+            <if test="id !=null ">and id=#{id}</if>
+            <if test="matchid !=null ">and matchid=#{matchid}</if>
+            <if test="userid!=null ">and userid=#{userid}</if>
+            <if test="seatnum!=null ">and seatnum=#{seatnum}</if>
+            <if test="totalprice!=null ">and totalprice=#{totalprice}</if>
+            <if test="ordertime!=null ">and ordertime=#{ordertime}</if>
+            <if test="updatatime!=null ">and updatatime=#{updatatime}</if>
+            <if test="price!=null ">and price=#{price}</if>
+            <if test="status!=null ">and status=#{status}</if>
+        </where>
+    </select>
+
+</mapper>

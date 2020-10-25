@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>购物车</title>
+	<base href="http://localhost:8080/film/">
+<link type="text/css" rel="stylesheet" href="css/style.css" >
+	<script type="text/javascript" src="script/jquery-1.7.2.js"></script>
+	<script type="text/javascript">
+		$(function () {
+
+		})
+	</script>
+</head>
+<body>
+	
+	<div id="header">
+			<img class="logo_img" alt="" src="static/img/logo.gif" >
+			<span class="wel_word">购物车</span>
+			<span name="sessionmsg" class="wel_word" th:text="${session.username}"></span>
+			<div>
+				<span>欢迎<span class="um_span" th:text="${session.username}"/><span>光大影城</span>
+					<a href="manager/order/list">我的订单</a>
+					<a href="logout">注销</a>
+					<a href="pages/home">返回</a>
+				</span>
+			</div>
+	</div>
+	
+	<div id="main">
+		<form th:action="@{manager/order/add(matchid=${param.matchid})}" method="post" accept-charset="UTF-8">
+			<table>
+				<tr>
+					<td>场次id</td>
+					<td>电影id</td>
+					<td>电影名</td>
+					<td>地点</td>
+					<td>放映厅类型</td>
+					<td>剩余座位</td>
+					<td>每张票价格</td>
+					<td>你选择的座位</td>
+					<td colspan="3">操作</td>
+				</tr>
+				<tr th:each="filmmatch : ${#request.getAttribute('filmmatch')}">
+					<td th:text="${filmmatch.id}"></td>
+					<td th:text="${filmmatch.film.id}"></td>
+					<td th:text="${filmmatch.film.filmname}"></td>
+					<td th:text="${filmmatch.location}"></td>
+					<td th:text="${filmmatch.halltype}"></td>
+					<td th:text="${filmmatch.reseats}"></td>
+					<td th:text="${filmmatch.filmprice}"></td>
+					<td><input name="seatnum" type="text" /></td>
+					<td><input type="submit" value="去支付"/></td>
+					<!--				<td><a href="manager/film/delete&id='${film.id}'">删除</a></td>-->
+<!--					<td><a class="deleteClass" th:href="@{order/add(matchid=${filmmatch.id},seatnum='::seatnum.value')}">去支付</a></td>-->
+				</tr>
+			</table>
+		</form>
+
+			<div class="cart_info">
+				<span class="cart_span">你选择<span class="b_count" th:text="${#request.getAttribute('filmmatch').size()}"></span>张影票</span>
+				<span class="cart_span">金额<span class="b_price" th:text="${#request.getAttribute('totalprice')}"></span>元</span>
+				<a class="updateClass" th:href="@{/templates/pages/home}">取消选座</a>
+<!--				<span class="cart_span"><a href="#">取消选座</a></span>-->
+<!--				<span class="cart_span"><a href="pages/cart/checkout.html">去支付</a></span>-->
+			</div>
+	
+	</div>
+	
+	<div id="bottom">
+		<span>
+			尚硅谷书城.Copyright &copy;2015
+		</span>
+	</div>
+</body>
+</html>

@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>影城首页</title>
+<link type="text/css" rel="stylesheet" href="../../static/css/style.css" >
+</head>
+<body>
+	
+	<div id="header">
+			<img class="logo_img" alt="" src="static/img/logo2.gif" >
+			<span class="wel_word">影城订票</span>
+<!--            <input name="msg" id="msg" th:value="${session.username}"/>-->
+            <span name="sessionmsg" class="wel_word" th:text="${session.username==null}?'session':'not exist'"></span>
+			<div th:if="${session.username==null}">
+<!--                <a href="hello2?username=carrot&age=12">test</a>|-->
+<!--                <a href="pages/error.html">error</a> |-->
+
+<!--				<a href="pages/user/login.html" id="login" name="login" th:class="${session.username}?'':'myHidestyle'">登录</a>-->
+                <a href="user/login.html" id="login" name="login" >登录</a>
+<!--                <a th:href="@{pages/user/login.html}" th:if="${session.username==null}">登录</a>|-->
+				<a href="user/regist.html">注册</a>
+<!--                <a th:href="@{pages/user/regist.html}" th:if="${session.username==null}">注册</a>|-->
+<!--				<a href="pages/cart/cart.html">我的订单</a>-->
+<!--&lt;!&ndash;                <a th:href="@{pages/cart/cart.html}" th:if="${session.username!=null}">我的订单</a>|&ndash;&gt;-->
+<!--				<a href="pages/manager/manager.html">后台管理</a>-->
+<!--                <a th:href="@{pages/manager/manager.html}" th:if="${session.username=='admin'}">后台管理</a>|-->
+			</div>
+            <div th:style="${session.username==null}?'display:none;':'padding:0px 0px 0px 20px;'">
+                <!--                <a th:href="@{pages/user/regist.html}" th:if="${session.username==null}">注册</a>|-->
+                <a href="cart/cart.html">我的订单</a>
+                <!--                <a th:href="@{pages/cart/cart.html}" th:if="${session.username!=null}">我的订单</a>|-->
+                <a href="manager/manager.html">后台管理</a>
+                <!--                <a th:href="@{pages/manager/manager.html}" th:if="${session.username=='admin'}">后台管理</a>|-->
+            </div>
+<!--            <form action="hello5" method="Post">-->
+<!--                <label><spring:message code="i18n.username"/>用户名称：</label>-->
+<!--                <input type="text" name="username" value="Tom"/>-->
+<!--                <br>-->
+<!--                <label><spring:message code="i18n.password"/>密码：</label>-->
+<!--                <input type="text" name="username" value="123456"/>-->
+<!--                <br>-->
+<!--                email: <input type="text" name="email" value="tom@carrot.com"/>-->
+<!--                <br>-->
+<!--                <input type="submit" value="Submit"/>-->
+<!--            </form>-->
+            <br><br>
+	</div>
+	<div id="main">
+        <div class="main_left" style="height:100%">
+                        <ul type="disc">
+                           <li>CBD店</li>
+                           <li>金融街店</li>
+                           <li>石景山店</li>
+                           <li>怀柔店</li>
+                       </ul>
+        </div>
+		<div id="book">
+
+<!--            <ul type="disc">
+                <li>CBD店</li>
+                <li>金融街店</li>
+                <li>石景山店</li>
+                <li>怀柔店</li>
+            </ul>-->
+            <div class="book_cond">
+				<form action="" method="get">
+
+				    放映厅<select id="selectarea">
+                            <option value="3D">3D</option>
+                            <option value="2D">2D</option>
+                            <option value="child">child</option>
+                            </select>
+                    上映日期<input  id= "selectdate" type="date" value="2020-09-14"/>
+                    <input type="submit" value="搜索" />
+<!--                    <input id="min" type="text" name="min" value=""> 元 - -->
+<!--						<input id="max" type="text" name="max" value=""> 元 -->
+<!--						<input type="submit" value="查询" />-->
+				</form>
+			</div>
+
+			<div class="b_list">
+				<div class="img_div">
+					<img class="book_img" alt="" src="../../static/img/logo2.jpg" />
+				</div>
+				<div class="book_info">
+					<div class="book_name">
+						<span class="sp1">电影名:</span>
+						<span class="sp2">八佰</span>
+					</div>
+					<div class="book_author">
+						<span class="sp1">电影类型:</span>
+						<span class="sp2">战争/动作</span>
+					</div>
+					<div class="book_price">
+						<span class="sp1">主演：</span>
+						<span class="sp2">姜武</span>
+					</div>
+					<div class="book_add">
+						<button>购票</button>
+					</div>
+				</div>
+			</div>
+
+            <div class="b_list">
+                <div class="img_div">
+                    <img class="book_img" alt="" src="../../static/img/logo2.jpg" />
+                </div>
+                <div class="book_info">
+                    <div class="book_name">
+                        <span class="sp1">电影名:</span>
+                        <span class="sp2">信条</span>
+                    </div>
+                    <div class="book_author">
+                        <span class="sp1">电影类型:</span>
+                        <span class="sp2">科幻/动作</span>
+                    </div>
+                    <div class="book_price">
+                        <span class="sp1">主演：</span>
+                        <span class="sp2">克里斯托弗·诺兰</span>
+                    </div>
+                    <div class="book_add">
+                        <button>购票</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="b_list">
+                <div class="img_div">
+                    <img class="book_img" alt="" src="../../static/img/logo2.jpg" />
+                </div>
+                <div class="book_info">
+                    <div class="book_name">
+                        <span class="sp1">电影名:</span>
+                        <span class="sp2">小妇人</span>
+                    </div>
+                    <div class="book_author">
+                        <span class="sp1">电影类型:</span>
+                        <span class="sp2">剧情/悬疑</span>
+                    </div>
+                    <div class="book_price">
+                        <span class="sp1">主演:</span>
+                        <span class="sp2">格蕾塔·葛韦格</span>
+                    </div>
+                    <div class="book_add">
+                        <button>购票</button>
+                    </div>
+                </div>
+            </div>
+
+<!--            <div class="b_list">
+                <div class="img_div">
+                    <img class="book_img" alt="" src="static/img/logo2.jpg" />
+                </div>
+                <div class="book_info">
+                    <div class="book_name">
+                        <span class="sp1">电影名:</span>
+                        <span class="sp2">八佰</span>
+                    </div>
+                    <div class="book_author">
+                        <span class="sp1">电影类型:</span>
+                        <span class="sp2">战争/动作</span>
+                    </div>
+                    <div class="book_price">
+                        <span class="sp1">价格:</span>
+                        <span class="sp2">主演：姜武</span>
+                    </div>
+                    <div class="book_add">
+                        <button>购票</button>
+                    </div>
+                </div>
+            </div>-->
+		</div>
+		
+		<div id="page_nav">
+		<a href="#">首页</a>
+		<a href="#">上一页</a>
+		<a href="#">3</a>
+		【4】
+		<a href="#">5</a>
+		<a href="#">下一页</a>
+		<a href="#">末页</a>
+		共10页，30条记录 到第<input value="4" name="pn" id="pn_input"/>页
+		<input type="button" value="确定">
+		</div>
+	
+	</div>
+	
+	<div id="bottom">
+		<span>
+			光大影城订票.Copyright &copy;2015
+		</span>
+	</div>
+</body>
+<script type="text/javascript" src="../../static/script/jquery-1.7.2.js"></script>
+<script type="text/javascript">
+    var bm=$("#msg").val()
+/*    if (bm != "") {
+        $("#a.login").style.display = "block";
+    }*/
+    if (bm == "") {
+        $("#a.login").style.display ="none";
+    }
+
+
+</script>
+</html>
