@@ -33,7 +33,7 @@
 		
 		<div id="main">
 <!--			<form action="manager/film/add" method="post" accept-charset="UTF-8">-->
-			<form th:action="@{manager/film/{action}(action=${param.id}?'update':'add',id=${param.id})}" method="post" accept-charset="UTF-8">
+			<form th:action="@{consumer/manager/film/{action}(action=${param.id}?'update':'add',id=${param.id})}" method="post" accept-charset="UTF-8">
 				<table>
 					<tr>
 						<td>id</td>

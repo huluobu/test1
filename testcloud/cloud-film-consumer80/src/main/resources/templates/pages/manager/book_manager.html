@@ -54,9 +54,10 @@
 				<td th:text="${film.sales}"></td>
 				<td th:text="${film.status}"></td>
 <!--				<td><a href="book_edit.html">修改</a></td>-->
-				<td><a class="updateClass" th:href="@{manager/film/query(id=${film.id})}">修改</a></td>
+				<td><a class="updateClass" th:href="@{consumer/manager/film/query(id=${film.id})}">修改</a></td>
+<!--				consumer/manager/film/query-->
 <!--				<td><a href="manager/film/delete&id='${film.id}'">删除</a></td>-->
-				<td><a class="deleteClass" th:href="@{manager/film/delete(id=${film.id})}">删除</a></td>
+				<td><a class="deleteClass" th:href="@{consumer/manager/film/delete(id=${film.id})}">删除</a></td>
 			</tr>	
 
 			
@@ -68,7 +69,7 @@
 				<td></td>
 				<td></td>
 				<td></td>
-				<td><a href="manager/film/page">添加电影</a></td>
+				<td><a href="consumer/manager/film/page">添加电影</a></td>
 			</tr>	
 		</table>
 	</div>
